@@ -24,4 +24,6 @@ const Endereco = connection.define("endereco", {
   },
 });
 
+
+
 module.exports = Endereco;

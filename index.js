@@ -19,11 +19,13 @@ authenticate(connection); // efetivar a conexão
 // Definição de Rotas
 const rotasClientes = require("./routes/clientes");
 const rotasPets = require("./routes/pets");
+const rotasEndereco = require("./routes/endereco");
 const produto = require("./database/produto")
 
 // Juntar ao app as rotas dos arquivos
 app.use(rotasClientes); // Configurar o grupo de rotas no app
 app.use(rotasPets);
+app.use(rotasEndereco);
 
 // Escuta de eventos (listen)
 app.listen(3001, () => {
