@@ -19,6 +19,7 @@ authenticate(connection); // efetivar a conexão
 // Definição de Rotas
 const rotasClientes = require("./routes/clientes");
 const rotasPets = require("./routes/pets");
+const produto = require("./database/produto")
 
 // Juntar ao app as rotas dos arquivos
 app.use(rotasClientes); // Configurar o grupo de rotas no app
@@ -26,8 +27,8 @@ app.use(rotasPets);
 
 // Escuta de eventos (listen)
 app.listen(3001, () => {
-  // Gerar as tabelas a partir do model
-  // Force = apaga tudo e recria as tabelas
-  connection.sync();
-  console.log("Servidor rodando em http://localhost:3001/");
+    // Gerar as tabelas a partir do model
+    // Force = apaga tudo e recria as tabelas
+    connection.sync();
+    console.log("Servidor rodando em http://localhost:3001/");
 });
