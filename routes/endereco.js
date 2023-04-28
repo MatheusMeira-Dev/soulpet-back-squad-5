@@ -9,16 +9,6 @@ const router = Router();
 
 
 
-// router.get("/clientes/:clienteId/endereco", async (req, res) => {
-//   const { id } = req.params;
-
-//   const endereco = await Endereco.findByPk(id);
-//   if (endereco) {
-//     res.json(endereco);
-//   } else {
-//     res.status(404).json({ message: "Endereço não encontrado." });
-//   }
-// });
 
 router.get("/clientes/:clienteId/endereco", async (req, res)=> {
   const clienteId = req.params.clienteId;
