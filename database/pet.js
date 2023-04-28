@@ -1,7 +1,8 @@
 const { DataTypes } = require("sequelize");
 const { connection } = require("./database");
 const Cliente = require("./cliente");
-const Servico = require("./serviço");
+const Servico = require("./servico");
+
 
 const Pet = connection.define("pet", {
   nome: {
@@ -21,7 +22,6 @@ const Pet = connection.define("pet", {
   },
 });
 
-Servico.hasMany(Pet)
 // Relacionamento 1:N (Um cliente pode ter N pets)
 Cliente.hasMany(Pet, { onDelete: "CASCADE" });
 // CASCADE = quando o cliente for deletado, TODOS os pets serão deletados

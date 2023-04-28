@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize");
 const { connection } = require("./database");
 const Pet = require("./pet");
-const Servico = require("./serviço");
+const Servico = require("./servico");
 
 const Agendamento = connection.define("agendamento", {
     realizada: {
@@ -14,8 +14,7 @@ const Agendamento = connection.define("agendamento", {
     }
 })
 
-Servico.hasMany(Agendamento);
 Pet.hasMany(Agendamento);
+Servico.hasMany(Agendamento);
 
-
-module.exports = Servico;
+module.exports = Agendamento;
