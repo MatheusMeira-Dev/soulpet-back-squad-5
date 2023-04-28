@@ -4,11 +4,11 @@ const Pet = require("./pet");
 const Servico = require("./serviço");
 
 const Agendamento = connection.define("agendamento", {
-    nome: {
-        type: DataTypes.STRING,
+    realizada: {
+        type: DataTypes.BOOLEAN,
         allowNull: false,
     },
-    dia: {
+    dataAgendada: {
         type: DataTypes.DATE,
         allowNull: false,
     }
