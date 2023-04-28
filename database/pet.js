@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize");
 const { connection } = require("./database");
 const Cliente = require("./cliente");
-const Servico = require("./servico");
+
 
 
 const Pet = connection.define("pet", {
