@@ -1,7 +1,40 @@
+const { where } = require("sequelize");
 const Produto = require("../database/produto");
 const {Router} = require("express");
 
 const router = Router();
+
+router.get("/produtos", async (req, res) => {
+  const { nome, categoria} = req.query;
+  const where = {};
+
+if (nome) where.nome = nome;
+if (categoria) where.categoria = categoria;
+
+try {
+  const produtos = await Produto.findAll({ where});
+  res.status(200).json(produtos);
+} catch (err) {
+  console.error(err);
+  res.status(400).json({ message: "Erro ao buscar os produtos"});
+}
+});
+
+router.get("/produtos/:id", async (req, res) => {
+  const {id} = req.params;
+
+  try {
+    const produto = await Produto.findOne({ where: {id} });
+    if (produto) {
+      res.status(200).json(produto);
+    } else {
+      res.status(400).json({ message: "Produto não encontrado"});
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(400).json({ message: "Erro ao buscar o produto"});
+  }
+});
 
 router.post("/produtos", async (req, res) => {
   // Coletar os dados do req.body

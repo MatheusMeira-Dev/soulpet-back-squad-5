@@ -8,7 +8,7 @@ const Servico = connection.define("servico", {
         allowNull: false,
     },
     preco: {
-        type: DataTypes.STRING,
+        type: DataTypes.NUMBER,
         allowNull: false,
     }
 })
