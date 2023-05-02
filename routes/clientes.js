@@ -1,6 +1,7 @@
 const Cliente = require("../database/cliente");
 const Endereco = require("../database/endereco");
 
+
 const { Router } = require("express");
 
 // Criar o grupo de rotas (/clientes)
