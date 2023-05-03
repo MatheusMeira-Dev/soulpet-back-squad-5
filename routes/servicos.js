@@ -49,5 +49,32 @@ router.put("/servicos/:id", async (req, res) => {
 });
 
 
+router.delete("/servicos/all", async (req, res) => {
+    try {
+        await Servico.destroy({ where: {} });
+        res.json({message: "Todos os serviços foram excluidos!"})
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({message: "Um erro aconteceu!" })
+    }
+});
+
+
+router.delete("/servicos/:id", async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const servico = await Servico.findByPk(id)
+        if (servico) {
+            await servico.destroy();
+            res.json({ message: "Serviço excluido!" })
+        } else {
+            res.status(404).json({ message: "O serviço não foi encontrado!" });
+        }
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ message: "Um erro aconteceu!" })
+    }
+});
 
 module.exports = router;
