@@ -68,7 +68,7 @@ const Cliente = connection.define("cliente", {
 // }
 
 
-// Associação 1:1 (One-to-One)
+// Associação 1:1 (One-to-One) qualquer coisa 
 const Endereco = require("./endereco");
 
 
