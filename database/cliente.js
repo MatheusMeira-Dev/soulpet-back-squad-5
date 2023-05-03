@@ -18,8 +18,7 @@ const clienteSchema = Joi.object({
         rua: Joi.string().required(),
         numero: Joi.string().required()
     }
-
-})
+});
 
 const options = {
     messages: {
@@ -34,7 +33,6 @@ const options = {
       'number.max': '{{#label}} deve ser menor ou igual a {{#limit}}'
     }
   };
-
 
 const Cliente = connection.define("cliente", {
     // Configurar a coluna 'nome'
@@ -55,18 +53,6 @@ const Cliente = connection.define("cliente", {
         allowNull: false,
     },
 });
-
-// function validarCliente(cliente) {
-//     const { error, value } = clienteSchema.validate(cliente);
-//     if (error) {
-//         return {
-//             statusCode:(400),
-//             message: error.details[0].message
-//         }
-//     }
-//     return value;
-// }
-
 
 // Associação 1:1 (One-to-One)
 const Endereco = require("./endereco");
