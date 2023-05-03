@@ -56,18 +56,6 @@ const Cliente = connection.define("cliente", {
     },
 });
 
-// function validarCliente(cliente) {
-//     const { error, value } = clienteSchema.validate(cliente);
-//     if (error) {
-//         return {
-//             statusCode:(400),
-//             message: error.details[0].message
-//         }
-//     }
-//     return value;
-// }
-
-
 // Associação 1:1 (One-to-One) qualquer coisa 
 const Endereco = require("./endereco");
 

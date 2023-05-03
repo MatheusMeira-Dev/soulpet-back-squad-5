@@ -14,7 +14,7 @@ const Agendamento = connection.define("agendamento", {
     }
 })
 
-Pet.hasMany(Agendamento);
-Servico.hasMany(Agendamento);
+Pet.hasMany(Agendamento, { onDelete: "CASCADE"});
+Servico.hasMany(Agendamento, { onDelete: "CASCADE"});
 
 module.exports = Agendamento;
