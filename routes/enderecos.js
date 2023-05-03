@@ -1,5 +1,5 @@
 const { where } = require("sequelize");
-const Cliente = require("../database/cliente");
+const { Cliente } = require("../database/cliente");
 const Endereco = require("../database/endereco");
 
 const { Router } = require("express");

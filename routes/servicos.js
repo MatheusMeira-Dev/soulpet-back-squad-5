@@ -1,4 +1,4 @@
-const { Servico, servicoSchema, options } = require("../database/servico");
+const Servico = require("../database/servico");
 const { Router } = require("express");
 
 const router = Router();

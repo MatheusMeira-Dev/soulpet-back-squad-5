@@ -18,7 +18,8 @@ const clienteSchema = Joi.object({
         rua: Joi.string().required(),
         numero: Joi.string().required()
     }
-});
+
+})
 
 const options = {
     messages: {
@@ -33,6 +34,7 @@ const options = {
       'number.max': '{{#label}} deve ser menor ou igual a {{#limit}}'
     }
   };
+
 
 const Cliente = connection.define("cliente", {
     // Configurar a coluna 'nome'

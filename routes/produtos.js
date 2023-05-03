@@ -12,7 +12,7 @@ if (nome) where.nome = nome;
 if (categoria) where.categoria = categoria;
 
 try {
-  const produtos = await Produto.findAll({ where});
+  const produtos = await Produto.findAll({ where });
   res.status(200).json(produtos);
 } catch (err) {
   console.error(err);
@@ -116,35 +116,5 @@ router.put("/produtos/:id", async (req, res) => {
     res.status(500).json({ message: "Um erro inesperado aconteceu." });
   }
 });
-
-
-router.delete('/produtos/all', async (req, res) => {
-  try {
-    await Produto.destroy({ truncate: true });
-    res.status(200).json({ message: 'Todos os produtos foram removidos.' });
-
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: 'Um erro inesperado aconteceu.' });
-  }
-});
-
-router.delete('/produtos/:id', async (req, res) => {
-  const { id } = req.params;
-  try {
-    const produto = await Produto.findOne({ where: { id } });
-    if (produto) {
-      await produto.destroy();
-      res.status(200).json({ message: 'Produto removido.' });
-    } else {
-      res.status(404).json({ message: 'Produto não encontrado.' });
-    }
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: 'Um erro inesperado aconteceu.' });
-  }
-});
-
-
 
 module.exports = router;
