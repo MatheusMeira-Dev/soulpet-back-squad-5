@@ -24,21 +24,32 @@ router.get("/servicos", async (req, res) => {
     }
 });
 
+router.get("/servicos/:id", async (req, res) => {
+    const { id } = req.params;
+    const servico = await Servico.findByPk(id);
+    try {
+        if (servico) {
+            res.status(201).json(servico);
+        } else {
+            res.status(404).json({ message: "Serviço não encontrado"})
+        }
+    } catch (err) {
+        res.status(500).json({ message: "um erro aconteu" });
+    }
+});
+
 router.put("/servicos/:id", async (req, res) => {
     const { nome, preco } = req.body;
     const { id } = req.params;
-    const { error } = servicoSchema.validate(req.body, options)
 
     try {
         const atualizarServico = await Servico.findByPk(id)
-        if (error) {
-            res.status(400).json({ message: `Dados invalidos ${error}` })
-        } else if (atualizarServico) {
+            if (atualizarServico) {
             await atualizarServico.update(
                 { nome, preco },
-                { where: { id: req.params.id } }
+                { where: { id: id } }
             );
-            res.json({ message: "Serviço Atualizado!" })
+            res.status(201).json({ message: "Serviço Atualizado!" })
         } else {
             res.status(404).json({ message: "Serviço não encontrado!" })
         }
