@@ -36,7 +36,7 @@ router.post("/clientes", async (req, res) => {
 
     try {
         if (error) {
-            res.status(400).json({ message: `Dados invalidos ${error})}`, codigoError: 400 })
+            res.status(400).json({ message: `Dados invalidos ${error})}`})
         } else {
             const novo = await Cliente.create(
                 { nome, email, telefone, endereco },
