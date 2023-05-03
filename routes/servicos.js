@@ -11,7 +11,7 @@ router.post("/servicos", async (req, res) => {
     res.status(201).json(newServico);
   } catch (err) {
     console.log(err);
-    res.status(500).json({ message: "um erro aconteceu!" });
+    res.status(500).json(err);
   }
 });
 

@@ -12,7 +12,7 @@ if (nome) where.nome = nome;
 if (categoria) where.categoria = categoria;
 
 try {
-  const produtos = await Produto.findAll({ where});
+  const produtos = await Produto.findAll({ where });
   res.status(200).json(produtos);
 } catch (err) {
   console.error(err);
