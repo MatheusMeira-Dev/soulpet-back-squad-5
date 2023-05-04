@@ -117,4 +117,32 @@ router.put("/produtos/:id", async (req, res) => {
   }
 });
 
+router.delete("/produtos/all", async (req, res) => {
+  try {
+      await Produto.destroy({ truncate: true });
+      res.status(201).json({message: "Todos os Produtos foram excluidos!"})
+  } catch (err) {
+      console.log(err);
+      res.status(500).json({message: "Um erro aconteceu!" })
+  }
+});
+
+
+router.delete("/produtos/:id", async (req, res) => {
+  const { id } = req.params;
+
+  try {
+      const produto = await Produto.findByPk(id)
+      if (produto) {
+          await produto.destroy();
+          res.status(201).json({ message: "Produto excluido!" })
+      } else {
+          res.status(404).json({ message: "O Produto não foi encontrado!" });
+      }
+  } catch (err) {
+      console.log(err);
+      res.status(500).json({ message: "Um erro aconteceu!" })
+  }
+});
+
 module.exports = router;

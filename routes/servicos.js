@@ -62,7 +62,7 @@ router.put("/servicos/:id", async (req, res) => {
 
 router.delete("/servicos/all", async (req, res) => {
     try {
-        await Servico.destroy({ where: {} });
+        await Servico.destroy({ truncate: true });
         res.json({message: "Todos os serviços foram excluidos!"})
     } catch (err) {
         console.log(err);
