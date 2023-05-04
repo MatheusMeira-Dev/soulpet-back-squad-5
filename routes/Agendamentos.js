@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const Agendamento = require("../database/agendamento");
+const Agendamento = require("../database/Agendamento");
 const Pet = require("../database/pet");
 const Servico = require("../database/servico");
 
