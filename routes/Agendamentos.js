@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const Agendamento = require("../database/agendamento");
+const Agendamento = require("../database/Agendamento");
 const Pet = require("../database/pet");
 const Servico = require("../database/servico");
 
@@ -11,6 +11,7 @@ router.get("/agendamentos", async (req, res) => {
 
 router.post("/agendamentos", async (req, res) => {
   const { realizada, dataAgendada, petId, servicoId } = req.body;
+  
   
   const pet = await Pet.findByPk(petId);
   const servico = await Servico.findByPk(servicoId);
