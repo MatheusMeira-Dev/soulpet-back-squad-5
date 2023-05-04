@@ -36,7 +36,7 @@ router.post("/clientes", async (req, res) => {
 
     try {
         if (error) {
-            res.status(400).json({ message: `Dados invalidos ${error})}`, codigoError: 400 })
+            res.status(400).json({ message: `Dados invalidos ${error})}`})
         } else {
             const novo = await Cliente.create(
                 { nome, email, telefone, endereco },
@@ -45,7 +45,6 @@ router.post("/clientes", async (req, res) => {
             // Dentro de 'novo' estará o o objeto criado    
             res.status(201).json(novo);
         }
-
     } catch (err) {
         console.log(err);
         res.status(500).json({ message: "Um erro aconteceu." });
@@ -58,10 +57,15 @@ router.put("/clientes/:id", async (req, res) => {
     const { nome, email, telefone, endereco } = req.body;
     // obter identificação do cliente pelos parametros da rota
     const { id } = req.params;
+    const { error } = clienteSchema.validate(req.body, options);
     try {
-        // buscar cliente pelo id passado
-        const cliente = await Cliente.findOne({ where: { id } });
-        // validar a existência desse cliente no banco de dados
+        if(error){
+            res.status(400).json({message: `Dados Invalidos ${error}`})
+            console.log(error)
+        } else {
+            // buscar cliente pelo id passado
+            const cliente = await Cliente.findOne({ where: { id } });
+            // validar a existência desse cliente no banco de dados        
         if (cliente) {
             // validar a existência desse do endereço passdo no corpo da requisição
             if (endereco) {
@@ -72,7 +76,7 @@ router.put("/clientes/:id", async (req, res) => {
             res.status(200).json({ message: "Cliente editado." });
         } else {
             res.status(404).json({ message: "Cliente não encontrado." });
-        }
+        }}
     } catch (err) {
         console.error(err);
         res.status(500).json({ message: "Um erro aconteceu." });

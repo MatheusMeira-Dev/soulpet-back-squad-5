@@ -1,14 +1,20 @@
-const Servico = require("../database/servico");
+const {Servico, servicoSchema, options } = require("../database/servico");
 const { Router } = require("express");
 
 const router = Router();
 
 router.post("/servicos", async (req, res) => {
     const { nome, preco } = req.body;
+    const { error } = servicoSchema.validate(req.body, options);
 
     try {
-        const newServico = await Servico.create({ nome, preco });
-        res.status(201).json(newServico);
+        if(error) {
+            res.status(400).json({message:`Dados invalidos ${error}`});            
+        } else {
+            const newServico = await Servico.create({ nome, preco });
+           
+            res.status(201).json(newServico);
+        }
     } catch (err) {
         console.log(err);
         res.status(500).json({ message: "um erro aconteceu!" });
@@ -41,17 +47,23 @@ router.get("/servicos/:id", async (req, res) => {
 router.put("/servicos/:id", async (req, res) => {
     const { nome, preco } = req.body;
     const { id } = req.params;
+    const { error } = servicoSchema.validate(req.body, options);
+
 
     try {
-        const atualizarServico = await Servico.findByPk(id)
-            if (atualizarServico) {
-            await atualizarServico.update(
-                { nome, preco },
-                { where: { id: id } }
-            );
-            res.status(201).json({ message: "Serviço Atualizado!" })
+        if(error) {
+            res.status(400).json({message:`Dados invalidos ${error}`})
         } else {
-            res.status(404).json({ message: "Serviço não encontrado!" })
+            const atualizarServico = await Servico.findByPk(id)
+                if (atualizarServico) {
+                await atualizarServico.update(
+                    { nome, preco },
+                    { where: { id: id } }
+                );
+                res.status(201).json({ message: "Serviço Atualizado!" })
+            } else {
+                res.status(404).json({ message: "Serviço não encontrado!" })
+            }
         }
     } catch (err) {
         console.log(err);

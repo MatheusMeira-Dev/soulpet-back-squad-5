@@ -12,6 +12,7 @@ router.get("/agendamentos", async (req, res) => {
 router.post("/agendamentos", async (req, res) => {
   const { realizada, dataAgendada, petId, servicoId } = req.body;
   
+  
   const pet = await Pet.findByPk(petId);
   const servico = await Servico.findByPk(servicoId);
   try {
