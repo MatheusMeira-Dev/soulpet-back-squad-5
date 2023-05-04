@@ -65,7 +65,7 @@ router.delete("/agendamentos/:id", async (req, res) => {
   try {
       const agendamento = await Agendamento.findByPk(id)
       if (agendamento) {
-          await Agendamento.destroy();
+          await agendamento.destroy();
           res.status(201).json({ message: "Agendamento excluido!" })
       } else {
           res.status(404).json({ message: "O Agendamento não foi encontrado!" });
