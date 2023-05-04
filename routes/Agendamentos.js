@@ -48,5 +48,31 @@ router.put("/agendamentos/:id", async (req, res) => {
   }
 })
 
+router.delete("/agendamentos/all", async (req, res) => {
+  try {
+      await Agendamento.destroy({ truncate: true });
+      res.status(201).json({message: "Todos os Agendamentos foram excluidos!"})
+  } catch (err) {
+      console.log(err);
+      res.status(500).json({message: "Um erro aconteceu!" })
+  }
+});
 
+
+router.delete("/agendamentos/:id", async (req, res) => {
+  const { id } = req.params;
+
+  try {
+      const agendamento = await Agendamento.findByPk(id)
+      if (agendamento) {
+          await Agendamento.destroy();
+          res.status(201).json({ message: "Agendamento excluido!" })
+      } else {
+          res.status(404).json({ message: "O Agendamento não foi encontrado!" });
+      }
+  } catch (err) {
+      console.log(err);
+      res.status(500).json({ message: "Um erro aconteceu!" })
+  }
+});
 module.exports = router;
